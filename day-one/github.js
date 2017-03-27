@@ -79,7 +79,7 @@ liveSearch.on('input', function() {
         let ul = new UnorderedList();
         data.items.forEach(function(repo) {
           let li = new ListItem();
-          let link = new Link(repo.url, repo.name);
+          let link = new Link(repo.html_url, repo.name);
           li.append(link);
           ul.append(li);
         });
@@ -102,7 +102,7 @@ new Ajax('https://api.github.com/repositories')
     let ul = new UnorderedList();
     data.forEach(function(repo) {
       let li = new ListItem();
-      let link = new Link(repo.url, repo.name)
+      let link = new Link(repo.html_url, repo.name)
       li.append(link);
       ul.append(li);
     });
