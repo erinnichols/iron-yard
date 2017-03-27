@@ -12,11 +12,11 @@ class Ajax {
     this._thenChain = [];
     this._catchChain = [];
     this._url = url;
-    this._headers = [];
+    this._headers = new Map();
   }
 
   addHeader(k, v) {
-    // just kidding!
+    this._headers.set(k, v);
     return this;
   }
 
@@ -35,8 +35,9 @@ class Ajax {
   get() {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', this._url, true);
-    xhr.setRequestHeader('Authorization', 'token 0769f07df1f34bacf719bd46c1ef19722c4c0d92');
-    xhr.setRequestHeader('Accept', 'application/vnd.github.v3+json');
+    this._headers.forEach(function (value, key) {
+      xhr.setRequestHeader(key, value);
+    });
     xhr.addEventListener('readystatechange', () => {
       if (xhr.readyState === XMLHttpRequest.DONE) {
         if (xhr.status >= 200 && xhr.status < 300) {
