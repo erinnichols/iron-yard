@@ -35,13 +35,12 @@ class Ajax {
   get() {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', this._url, true);
-    xhr.setRequestHeader('Authorization', 'token 3db815c6c7372e03b9bb87c6ceeb60b2a66c5035');
+    xhr.setRequestHeader('Authorization', 'token 0769f07df1f34bacf719bd46c1ef19722c4c0d92');
     xhr.setRequestHeader('Accept', 'application/vnd.github.v3+json');
     xhr.addEventListener('readystatechange', () => {
       if (xhr.readyState === XMLHttpRequest.DONE) {
         if (xhr.status >= 200 && xhr.status < 300) {
           let data = xhr.response;
-          console.log('response type', xhr.responseType);
           this._thenChain.forEach(function (callback) {
             data = callback(data);
           });
