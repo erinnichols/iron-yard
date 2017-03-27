@@ -67,12 +67,14 @@ class LiveSearch {
 
 // add a live search widget
 
+const githubToken = '0769f07df1f34bacf719bd46c1ef19722c4c0d92';
+
 let liveSearch = new LiveSearch();
 liveSearch.on('input', function() {
   if (this.value.length >= 3) {
     // do this stupid search thing
     new Ajax('https://api.github.com/search/repositories?q=' + this.value)
-      .addHeader('Authorization', 'token 0769f07df1f34bacf719bd46c1ef19722c4c0d92')
+      .addHeader('Authorization', 'token ' + githubToken)
       .addHeader('Accept', 'application/vnd.github.v3+json')
       .then(function(text) {
         let data = JSON.parse(text);
@@ -95,7 +97,7 @@ document.body.appendChild(liveSearch.render());
 // load the initial list of repos
 
 new Ajax('https://api.github.com/repositories')
-  .addHeader('Authorization', 'token 0769f07df1f34bacf719bd46c1ef19722c4c0d92')
+  .addHeader('Authorization', 'token ' + githubToken)
   .addHeader('Accept', 'application/vnd.github.v3+json')
   .then(function(text) {
     let data = JSON.parse(text);
